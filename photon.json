@@ -1,0 +1,154 @@
+{
+  "min_packer_version": "1.6.3",
+  "variables": {
+    "OVF_TEMPLATE": "photon.xml.template",
+    "ovftool_deploy_vcenter": "10.10.13.1",
+    "ovftool_deploy_vcenter_username": "jarvis@jarvis.lab",
+    "ovftool_deploy_vcenter_password": "!Jarv1sl@b"
+  },
+  "builders": [
+    {
+      "type": "vmware-iso",
+      "vm_name": "{{ user `vm_name` }}",
+      "guest_os_type": "Other",
+      "version": "13",
+      "disk_size": "12288",
+      "disk_additional_size": [
+        "25600"
+      ],
+      "boot_command": [
+        "<esc><wait>",
+        "vmlinuz initrd=initrd.img root=/dev/ram0 loglevel=3 ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/photon-kickstart.json photon.media=cdrom",
+        "<enter>"
+      ],
+      "boot_wait": "10s",
+      "headless": false,
+      "vnc_over_websocket": true,
+      "insecure_connection": true,
+      "iso_url": "{{ user `iso_url` }}",
+      "iso_checksum": "{{ user `iso_checksum` }}",
+      "http_directory": "http",
+      "remote_type": "esx5",
+      "remote_host": "{{ user `builder_host` }}",
+      "remote_datastore": "{{ user `builder_host_datastore` }}",
+      "remote_username": "{{ user `builder_host_username` }}",
+      "remote_password": "{{ user `builder_host_password` }}",
+      "ssh_username": "{{ user `guest_username` }}",
+      "ssh_password": "{{ user `guest_password` }}",
+      "ssh_port": 22,
+      "format": "ovf",
+      "shutdown_command": "/sbin/shutdown -h now",
+      "shutdown_timeout": "1000s",
+      "vmx_data": {
+        "numvcpus": "{{ user `numvcpus` }}",
+        "memsize": "{{ user `ramsize` }}",
+        "ethernet0.networkName": "{{ user `builder_host_portgroup` }}",
+        "ethernet0.present": "TRUE",
+        "ethernet0.startConnected": "TRUE",
+        "ethernet0.virtualDev": "vmxnet3",
+        "ethernet0.addressType": "generated",
+        "ethernet0.wakeOnPcktRcv": "FALSE",
+        "annotation": "Version: {{ user `APPLIANCE_VERSION` }}"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": ["mkdir -p /root/config"]
+    },
+    {
+      "type": "file",
+      "source": "bom.json",
+      "destination": "/root/config/bom.json"
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "APPLIANCE_VERSION={{ user `APPLIANCE_VERSION` }}"
+      ],
+      "expect_disconnect" : true,
+      "scripts": [
+        "scripts/photon-settings.sh",
+        "scripts/photon-docker.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "APPLIANCE_VERSION={{ user `APPLIANCE_VERSION` }}"
+      ],
+      "pause_before": "20s",
+      "scripts": [
+        "scripts/photon-containers.sh",
+        "scripts/photon-cleanup.sh"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "files/rc.local",
+      "destination": "/etc/rc.d/rc.local"
+    },
+    {
+      "type": "file",
+      "source": "files/getOvfProperty.py",
+      "destination": "/root/setup/getOvfProperty.py"
+    },
+    {
+      "type": "file",
+      "source": "files/setup.sh",
+      "destination": "/root/setup/setup.sh"
+    },
+    {
+      "type": "file",
+      "source": "files/setup-01-os.sh",
+      "destination": "/root/setup/setup-01-os.sh"
+    },
+    {
+      "type": "file",
+      "source": "files/setup-02-proxy.sh",
+      "destination": "/root/setup/setup-02-proxy.sh"
+    },
+    {
+      "type": "file",
+      "source": "files/setup-03-network.sh",
+      "destination": "/root/setup/setup-03-network.sh"
+    },
+    {
+      "type": "file",
+      "source": "files/setup-04-kubernetes.sh",
+      "destination": "/root/setup/setup-04-kubernetes.sh"
+    },
+    {
+      "type": "file",
+      "source": "files/setup-05-cadvisor.sh",
+      "destination": "/root/setup/setup-05-cadvisor.sh"
+    },
+    {
+      "type": "file",
+      "source": "files/setup-06-tinywww.sh",
+      "destination": "/root/setup/setup-06-tinywww.sh"
+    },
+    {
+      "type": "file",
+      "source": "files/setup-07-fluentbit.sh",
+      "destination": "/root/setup/setup-07-fluentbit.sh"
+    },
+    {
+      "type": "file",
+      "source": "files/tinywww-debug.yml",
+      "destination": "/root/config/tinywww-debug.yml"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "shell-local",
+      "environment_vars": ["APPLIANCE_VERSION={{ user `APPLIANCE_VERSION` }}", "KUBERNETES_APPLIANCE_NAME={{ user `vm_name` }}", "FINAL_KUBERNETES_APPLIANCE_NAME={{ user `vm_name` }}_{{user `APPLIANCE_VERSION`}}", "OVF_TEMPLATE={{ user `OVF_TEMPLATE` }}"],
+      "inline": [
+        "cd manual",
+        "./add_ovf_properties.sh"
+      ]
+    }
+  ]
+}
+
