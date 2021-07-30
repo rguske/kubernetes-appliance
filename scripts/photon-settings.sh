@@ -35,19 +35,6 @@ tdnf install -y \
   parted \
   tmux
 
-# Create bash profile
-echo '> Creating bash profile'
-
-cd ~
-
-cat > ~/.profile << EOF
-# Makes your life easier
-
-alias k=kubectl
-alias c=clear
-alias w='watch -n 1'
-EOF
-
 echo '> Adding K8s Repo'
 curl -L https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg -o /etc/pki/rpm-gpg/GOOGLE-RPM-GPG-KEY
 rpm --import /etc/pki/rpm-gpg/GOOGLE-RPM-GPG-KEY
