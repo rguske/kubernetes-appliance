@@ -1,6 +1,6 @@
     <ProductSection ovf:required="true">
     <Info>Information about the installed software</Info>
-      <Product>Knative Appliance</Product>
+      <Product>Kubernetes Appliance</Product>
       <Vendor>VMware</Vendor>
       <Version>{{VERSION}}</Version>
       <ProductUrl>https://github.com/rguske/</ProductUrl>
