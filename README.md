@@ -25,7 +25,7 @@ Credits goes out to [William Lam](https://twitter.com/lamw). He developed this g
 
 ## :eyeglasses: Overview
 
-This repository contains the necessary code to build a [![Photon OS 3.0](https://img.shields.io/badge/Photon%20OS-3.0-orange)](https://vmware.github.io/photon/) based Kubernetes Appliance by using [Packer](https://learn.hashicorp.com/tutorials/packer/get-started-install-cli). 
+This repository contains the necessary code to build a [![Photon OS 3.0](https://img.shields.io/badge/Photon%20OS-3.0-orange)](https://vmware.github.io/photon/) based Kubernetes Appliance.
 
 The Appliance can be quickly deployed on vSphere for testing, development or learning purposes. Perhaps, it serves as the foundation for your project(s) 😉
 
