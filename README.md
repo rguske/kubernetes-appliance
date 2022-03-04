@@ -9,11 +9,12 @@
 - [Kubernetes Appliance - VMware OVA](#kubernetes-appliance---vmware-ova)
   - [:book: Table of Content](#book-table-of-content)
   - [:raised_hands: Credits](#raised_hands-credits)
-  - [Overview](#overview)
+  - [:eyeglasses: Overview](#eyeglasses-overview)
   - [:computer: Requirements](#computer-requirements)
-  - [Building the Appliance](#building-the-appliance)
+  - [:man_cook: Building the Appliance](#man_cook-building-the-appliance)
     - [Debugging](#debugging)
     - [Output directoy](#output-directoy)
+  - [Deployment Options Appliance](#deployment-options-appliance)
 
 ## :raised_hands: Credits
 
@@ -21,7 +22,7 @@ Credits goes out to [William Lam](https://twitter.com/lamw). He developed this g
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/lamw?style=social)](https://twitter.com/lamw)
 
-## Overview
+## :eyeglasses: Overview
 
 This repository contains the necessary code to build a [![Photon OS 3.0](https://img.shields.io/badge/Photon%20OS-3.0-orange)](https://vmware.github.io/photon/) based Kubernetes Appliance by using [Packer](https://learn.hashicorp.com/tutorials/packer/get-started-install-cli). The Kubernetes Appliance can easily be deployed on VMware's Desktop Hypervisor solutions Fusion (Mac/Linux) and Workstaion (Windows) as well as on vSphere.
 
@@ -37,31 +38,36 @@ This repository contains the necessary code to build a [![Photon OS 3.0](https:/
 **Network:**
 
 - DHCP enabled
-- SSH enabled
-- No network restrictions between the build system (were `packer` is running on) and the VMware ESXi host.
+- SSH enabled (port 22)
+- No network restrictions between the build system (were `packer` is running on) and the VMware ESXi host
 - Packer will create an http server serving `http_directory`
   - Random port used within the range of 8000 and 9000
 
-**ESXi Version**
+**vSphere**
 
 - ESXi 6.7 or greater
-- ! All my tests failed with latest vSphere ESXi 7.0U2a !
+- Enable GuestIPHack on the ESXi host before building the appliance: `esxcli system settings advanced set -o /Net/GuestIPHack -i 1`
 
-## Building the Appliance
+## :man_cook: Building the Appliance
 
-1. Clone the repository
-`git clone https://github.com/rguske/kubernetes-appliance.git`
-
-2. Change directoy
-`cd kubernetes-appliance`
-3. Adjust the `photon-builder.json` file with the appropriate ESXi (Build host) data (IP, user, password, datastore, network)
-4. If you like to change the versions for e.g. Kubernetes, just modify those via the `k8s-app-bom.json`.
-5. Run the `build.sh` script
+1. Clone the repository: `git clone https://github.com/rguske/kubernetes-appliance.git`
+2. Change into the directoy: `cd kubernetes-appliance`
+3. Adjust the `photon-builder.json` file with the appropriate ESXi (Build host) data (IP or FQDN, user, password, datastore, network)
+4. Optional: If you like to change the versions for e.g. Kubernetes or Antrea, modify those in the `k8s-app-bom.json`
+5. Execute the `build.sh` script: `./build.sh`
 
 ### Debugging
 
-By putting `PACKER_LOG=1` in front of the `packer build` command in the `build.sh` script, it gives you a very detailed output during the build. Example: `PACKER_LOG=1 packer build -var "APPLIANCE_VERSION=${APPLIANCE_VERSION_FROM_BOM}" [...]` ).
+A very detailed `debug` output can be enabled by adding `PACKER_LOG=1` before the `packer build` command within the `build.sh` script. Example: `PACKER_LOG=1 packer build -var "K8S_APP_VERSION=${K8S_APP_VERSION_FROM_BOM}" -var-file=photon-builder.json -var-file=photon-version.json photon.json` ).
 
 ### Output directoy
 
 The finished build `ova` file will be exported to the `output-vmware-iso` directory.
+
+## Deployment Options Appliance
+
+![rguske-k8s-app-ova-1](https://user-images.githubusercontent.com/31652019/156720139-afd35002-2156-4f56-8bec-87ad2492fea5.png)
+
+![rguske-k8s-app-ova-2](https://user-images.githubusercontent.com/31652019/156720147-79fe6870-a4a5-4b08-a38c-63361980c982.png)
+
+![rguske-k8s-app-ova-3](https://user-images.githubusercontent.com/31652019/156720148-f4fb1dd0-1543-4322-a4f7-a807254b75bf.png)

@@ -2,6 +2,7 @@
     <Info>Information about the installed software</Info>
       <Product>Kubernetes Appliance</Product>
       <Version>{{VERSION}}</Version>
+      <ProductUrl>https://github.com/rguske/kubernetes-appliance</ProductUrl>
       <Category>Networking</Category>
         <Property ovf:key="guestinfo.hostname" ovf:type="string" ovf:userConfigurable="true">
             <Label>Hostname</Label>
