@@ -50,19 +50,28 @@ This repository contains the necessary code to build a [![Photon OS 3.0](https:/
 
 ## :man_cook: Building the Appliance
 
-1. Clone the repository: `git clone https://github.com/rguske/kubernetes-appliance.git`
+1. Clone the repository: `git clone git@github.com:rguske/kubernetes-appliance.git`
 2. Change into the directoy: `cd kubernetes-appliance`
-3. Adjust the `photon-builder.json` file with the appropriate ESXi (Build host) data (IP or FQDN, user, password, datastore, network)
-4. Optional: If you like to change the versions for e.g. Kubernetes or Antrea, modify those in the `k8s-app-bom.json`
-5. Execute the `build.sh` script: `./build.sh`
+3. Adjust the `photon-builder.json` file with the appropriate ESXi (build host) data (IP or FQDN, user, password, datastore, network)
+4. Execute the `build.sh` script: `./build.sh`
+
+Optional: If you like to change the versions for e.g. Kubernetes or Antrea, modify those in the `k8s-app-bom.json`
 
 ### Debugging
 
-A very detailed `debug` output can be enabled by adding `PACKER_LOG=1` before the `packer build` command within the `build.sh` script. Example: `PACKER_LOG=1 packer build -var "K8S_APP_VERSION=${K8S_APP_VERSION_FROM_BOM}" -var-file=photon-builder.json -var-file=photon-version.json photon.json` ).
+The SSH session initiated will be visible in the detail provided when `PACKER_LOG=1` environment variable is set within the `build.sh` script. 
+
+Example: `PACKER_LOG=1 packer build -var "K8S_APP_VERSION=${K8S_APP_VERSION_FROM_BOM}" -var-file=photon-builder.json -var-file=photon-version.json photon.json` ).
 
 ### Output directoy
 
-The finished build `ova` file will be exported to the `output-vmware-iso` directory.
+The finished `ova` file will be exported to the `output-vmware-iso` directory.
+
+## `zsh` installed
+
+I'm a happy user of [zsh](https://www.zsh.org/) and [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and therefore, when connecting to the appliance via `ssh`, you will use a "pimped" shell environment.
+
+<img width="1210" alt="rguske-zsh" src="https://user-images.githubusercontent.com/31652019/156823928-731e50db-b31a-4ce5-ab08-4146438b65fb.png">
 
 ## Deployment Options Appliance
 
