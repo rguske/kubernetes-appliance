@@ -19,7 +19,7 @@
 
 ## :raised_hands: Credits
 
-Credits goes out to [William Lam](https://twitter.com/lamw). He developed this great way to build an VMware Photon OS based appliance in an automated fashion from scratch for project [VMware Event Broker Appliance](https://www.vmweventbroker.io). I reused the code and stripped it down to the necessary pieces and extended it for my needs.
+Credits goes out to [William Lam](https://twitter.com/lamw). The code basis comes from project [VMware Event Broker Appliance](https://www.vmweventbroker.io) which William and [Michael Gasch](https://twitter.com/embano1) are maintaining. I reused the code and stripped it down to the necessary pieces and extended it for my needs.
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/lamw?style=social)](https://twitter.com/lamw)
 
