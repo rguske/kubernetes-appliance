@@ -50,8 +50,11 @@ kubectl --kubeconfig /root/.kube/config apply -f /root/download/antrea.yml
 echo -e "\e[92mStarting k8s ..." > /dev/console
 systemctl enable kubelet.service
 
-while [[ $(systemctl is-active kubelet.service) == "inactive" ]]
-do
-    echo -e "\e[92mk8s service is still inactive, sleeping for 10secs" > /dev/console
-    sleep 10
-done
+#while [[ $(systemctl is-active kubelet.service) == "inactive" ]]
+#do
+#    echo -e "\e[92mk8s service is still inactive, sleeping for 10secs" > /dev/console
+#    sleep 10
+#done
+
+echo -e "\e[92mCreating Namespaces ..." > /dev/console
+kubectl create namespace tinywww

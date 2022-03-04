@@ -21,4 +21,4 @@ rm -f output-iso/*.ova
 K8S_APP_VERSION_FROM_BOM=$(jq -r < ${K8S_BOM_FILE} '.appliance.version')
 
 echo "Building K8s Appliance OVA from ${K8S_APP_VERSION_FROM_BOM} ..."
-PACKER_LOG=3 packer build -var "K8S_APP_VERSION=${K8S_APP_VERSION_FROM_BOM}" -var-file=photon-builder.json -var-file=photon-version.json photon.json
+PACKER_LOG=1 packer build -var "K8S_APP_VERSION=${K8S_APP_VERSION_FROM_BOM}" -var-file=photon-builder.json -var-file=photon-version.json photon.json

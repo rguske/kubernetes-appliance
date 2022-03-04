@@ -1,6 +1,7 @@
     <ProductSection ovf:required="true">
     <Info>Information about the installed software</Info>
       <Product>Kubernetes Appliance</Product>
+      <Vendor>OSS</Vendor>
       <Version>{{VERSION}}</Version>
       <ProductUrl>https://github.com/rguske/kubernetes-appliance</ProductUrl>
       <Category>Networking</Category>

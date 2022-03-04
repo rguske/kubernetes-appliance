@@ -51,6 +51,9 @@ else
 	echo -e "\e[92mStarting Kubernetes Configuration ..." > /dev/console
 	. /root/setup/setup-04-kubernetes.sh
 
+	echo -e "\e[92mStarting Shell Configuration ..." > /dev/console
+	. /root/setup/setup-05-shell.sh
+
 	echo -e "\e[92mStarting TinyWWW Configuration ..." > /dev/console
 	. /root/setup/setup-06-tinywww.sh
 

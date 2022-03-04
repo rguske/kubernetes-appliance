@@ -118,6 +118,11 @@
     },
     {
       "type": "file",
+      "source": "files/setup-05-shell.sh",
+      "destination": "/root/setup/setup-05-shell.sh"
+    },
+    {
+      "type": "file",
       "source": "files/setup-06-tinywww.sh",
       "destination": "/root/setup/setup-06-tinywww.sh"
     },
