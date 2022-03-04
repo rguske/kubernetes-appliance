@@ -10,10 +10,11 @@
   - [:book: Table of Content](#book-table-of-content)
   - [:raised_hands: Credits](#raised_hands-credits)
   - [:eyeglasses: Overview](#eyeglasses-overview)
-  - [:computer: Requirements](#computer-requirements)
+  - [:clipboard: Requirements](#clipboard-requirements)
   - [:man_cook: Building the Appliance](#man_cook-building-the-appliance)
     - [Debugging](#debugging)
     - [Output directoy](#output-directoy)
+  - [:computer: zsh installed](#computer-zsh-installed)
   - [Deployment Options Appliance](#deployment-options-appliance)
 
 ## :raised_hands: Credits
@@ -26,7 +27,7 @@ Credits goes out to [William Lam](https://twitter.com/lamw). He developed this g
 
 This repository contains the necessary code to build a [![Photon OS 3.0](https://img.shields.io/badge/Photon%20OS-3.0-orange)](https://vmware.github.io/photon/) based Kubernetes Appliance by using [Packer](https://learn.hashicorp.com/tutorials/packer/get-started-install-cli). The Kubernetes Appliance can easily be deployed on VMware's Desktop Hypervisor solutions Fusion (Mac/Linux) and Workstaion (Windows) as well as on vSphere.
 
-## :computer: Requirements
+## :clipboard: Requirements
 
 **CLI Tools:**
 
@@ -67,7 +68,7 @@ Example: `PACKER_LOG=1 packer build -var "K8S_APP_VERSION=${K8S_APP_VERSION_FROM
 
 The finished `ova` file will be exported to the `output-vmware-iso` directory.
 
-## `zsh` installed
+## :computer: `zsh` installed
 
 I'm a happy user of [zsh](https://www.zsh.org/) and [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) and therefore, when connecting to the appliance via `ssh`, you will use a "pimped" shell environment.
 
