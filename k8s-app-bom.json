@@ -1,0 +1,55 @@
+{
+    "appliance": {
+        "version": "v0.1.0"
+    },
+    "antrea": {
+        "gitRepoTag": "v1.2.0",
+        "containers": [{
+            "name": "projects.registry.vmware.com/antrea/antrea-ubuntu",
+            "version": "v1.2.0"
+        }]
+    },
+    "kubernetes": {
+        "gitRepoTag": "v1.21.5",
+        "containers": [{
+                "name": "k8s.gcr.io/kube-apiserver",
+                "version": "v1.21.5"
+            },
+            {
+                "name": "k8s.gcr.io/kube-controller-manager",
+                "version": "v1.21.5"
+            },
+            {
+                "name": "k8s.gcr.io/kube-scheduler",
+                "version": "v1.21.5"
+            },
+            {
+                "name": "k8s.gcr.io/kube-proxy",
+                "version": "v1.21.5"
+            },
+            {
+                "name": "k8s.gcr.io/pause",
+                "version": "3.4.1"
+            },
+            {
+                "name": "k8s.gcr.io/pause",
+                "version": "3.5"
+            },
+            {
+                "name": "k8s.gcr.io/etcd",
+                "version": "3.4.13-0"
+            },
+            {
+                "name": "k8s.gcr.io/coredns/coredns",
+                "version": "v1.8.0"
+            }
+        ]
+    },
+    "tinywww": {
+        "gitRepoTag": "master",
+        "containers": [{
+            "name": "projects.registry.vmware.com/veba/tinywww",
+            "version": "latest"
+        }]
+    }
+}

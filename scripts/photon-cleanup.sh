@@ -7,7 +7,6 @@
 ##
 
 # Clear tdnf cache
-
 echo '> Clearing tdnf cache...'
 tdnf clean all
 

@@ -1,10 +1,7 @@
     <ProductSection ovf:required="true">
     <Info>Information about the installed software</Info>
       <Product>Kubernetes Appliance</Product>
-      <Vendor>VMware</Vendor>
       <Version>{{VERSION}}</Version>
-      <ProductUrl>https://github.com/rguske/</ProductUrl>
-      <VendorUrl>https://www.vmware.com/</VendorUrl>
       <Category>Networking</Category>
         <Property ovf:key="guestinfo.hostname" ovf:type="string" ovf:userConfigurable="true">
             <Label>Hostname</Label>
@@ -60,24 +57,11 @@
             <Label>Root Password</Label>
             <Description>Password to login in as root. Please use a secure password</Description>
         </Property>
-      <Category>Syslog Server Configuration</Category>
-        <Property ovf:key="guestinfo.syslog_server_hostname" ovf:type="string" ovf:userConfigurable="true">
-            <Label>Hostname or IP Address</Label>
-            <Description>Specify the Hostname (FQDN) or IP Address of the Syslog Server</Description>
-        </Property>
-        <Property ovf:key="guestinfo.syslog_server_port" ovf:type="string" ovf:userConfigurable="true" ovf:value="514">
-            <Label>Port</Label>
-            <Description>Syslog Server Port</Description>
-        </Property>
-        <Property ovf:key="guestinfo.syslog_server_protocol" ovf:qualifiers="ValueMap{&quot;TCP&quot;,&quot;TLS&quot;,&quot;UDP&quot;}" ovf:userConfigurable="true" ovf:type="string" ovf:value="TCP">
-            <Label>Protocol</Label>
-            <Description>Choose the Transport Protocol</Description>
-        </Property>
-        <Property ovf:key="guestinfo.syslog_server_format" ovf:qualifiers="ValueMap{&quot;RFC5424&quot;,&quot;RFC3164&quot;}" ovf:userConfigurable="true" ovf:type="string" ovf:value="RFC5424">
-            <Label>Format</Label>
-            <Description>Choose the Syslog Protocol Format</Description>
-        </Property>
       <Category>zAdvanced</Category>
+        <Property ovf:key="guestinfo.debug" ovf:type="boolean" ovf:userConfigurable="true" ovf:value="false">
+            <Label>Debugging</Label>
+            <Description>Enable Debugging</Description>
+        </Property>
         <Property ovf:key="guestinfo.docker_network_cidr" ovf:type="string" ovf:userConfigurable="true" ovf:value="172.17.0.1/16">
             <Label>Docker Bridge CIDR Network</Label>
             <Description>Customize Docker Bridge CIDR Network (Default 172.17.0.1/16)</Description>

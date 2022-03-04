@@ -45,7 +45,7 @@ spec:
       - name: bootstrap
         hostPath:
           # location on host
-          path: /var/log/bootstrap-debug.log
+          path: /var/log/bootstrap.log
       - name: auth
         secret:
           secretName: basic-auth

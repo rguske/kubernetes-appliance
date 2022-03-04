@@ -1,9 +1,9 @@
 {
-    "hostname": "kubernetes",
+    "hostname": "k8s-appliance",
     "password":
         {
             "crypted": false,
-            "text": "VMware1!"
+            "text": "##FILL-IN-SECURE-PASSWORD##"
         },
     "disk": "/dev/sda",
     "packagelist_file": "packages_minimal.json",

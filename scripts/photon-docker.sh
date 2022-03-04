@@ -12,4 +12,3 @@ systemctl enable docker
 reboot
 
 echo '> Done'
-

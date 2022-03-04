@@ -6,7 +6,7 @@
 
 set -euo pipefail
 
-BOM_FILE=/root/config/bom.json
+K8S_BOM_FILE=/root/config/k8s-app-bom.json
 
 echo -e "\e[92mStarting Docker ..." > /dev/console
 systemctl daemon-reload
@@ -24,7 +24,7 @@ fi
 
 # Setup k8s
 echo -e "\e[92mSetting up k8s ..." > /dev/console
-K8S_VERSION=$(jq -r < ${BOM_FILE} '.["kubernetes"].gitRepoTag')
+K8S_VERSION=$(jq -r < ${K8S_BOM_FILE} '.["kubernetes"].gitRepoTag')
 cat > /root/config/kubeconfig.yml << __EOF__
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: InitConfiguration
@@ -42,10 +42,10 @@ kubeadm init --ignore-preflight-errors SystemVerification --skip-token-print --c
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
-kubectl taint nodes --all node-role.kubernetes.io/master-
+kubectl --kubeconfig /root/.kube/config taint nodes --all node-role.kubernetes.io/master-
 
 echo -e "\e[92mDeloying Antrea ..." > /dev/console
-kubectl apply -f /root/download/antrea.yml
+kubectl --kubeconfig /root/.kube/config apply -f /root/download/antrea.yml
 
 echo -e "\e[92mStarting k8s ..." > /dev/console
 systemctl enable kubelet.service
@@ -55,12 +55,3 @@ do
     echo -e "\e[92mk8s service is still inactive, sleeping for 10secs" > /dev/console
     sleep 10
 done
-
-echo -e "\e[92mDeploying Local Storage Provisioner ..." > /dev/console
-mkdir -p ${LOCAL_STOARGE_VOLUME_PATH}/local-path-provisioner
-chmod 777 ${LOCAL_STOARGE_VOLUME_PATH}/local-path-provisioner
-kubectl apply -f /root/download/local-path-storage.yaml
-kubectl patch sc local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
-
-echo -e "\e[92mCreating VMware namespaces ..." > /dev/console
-kubectl create namespace vmware-system

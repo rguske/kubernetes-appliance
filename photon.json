@@ -1,10 +1,10 @@
 {
   "min_packer_version": "1.6.3",
   "variables": {
-    "OVF_TEMPLATE": "photon.xml.template",
+    "k8s_app_ovf_template": "photon.xml.template",
     "ovftool_deploy_vcenter": "10.10.13.1",
-    "ovftool_deploy_vcenter_username": "jarvis@jarvis.lab",
-    "ovftool_deploy_vcenter_password": "!Jarv1sl@b"
+    "ovftool_deploy_vcenter_username": "administrator@jarvis.lab",
+    "ovftool_deploy_vcenter_password": "VMware1234!?!"
   },
   "builders": [
     {
@@ -13,9 +13,6 @@
       "guest_os_type": "Other",
       "version": "13",
       "disk_size": "12288",
-      "disk_additional_size": [
-        "25600"
-      ],
       "boot_command": [
         "<esc><wait>",
         "vmlinuz initrd=initrd.img root=/dev/ram0 loglevel=3 ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/photon-kickstart.json photon.media=cdrom",
@@ -48,7 +45,7 @@
         "ethernet0.virtualDev": "vmxnet3",
         "ethernet0.addressType": "generated",
         "ethernet0.wakeOnPcktRcv": "FALSE",
-        "annotation": "Version: {{ user `APPLIANCE_VERSION` }}"
+        "annotation": "Version: {{ user `K8S_APP_VERSION` }}"
       }
     }
   ],
@@ -59,13 +56,13 @@
     },
     {
       "type": "file",
-      "source": "bom.json",
-      "destination": "/root/config/bom.json"
+      "source": "k8s-app-bom.json",
+      "destination": "/root/config/k8s-app-bom.json"
     },
     {
       "type": "shell",
       "environment_vars": [
-        "APPLIANCE_VERSION={{ user `APPLIANCE_VERSION` }}"
+        "K8S_APP_VERSION={{ user `K8S_APP_VERSION` }}"
       ],
       "expect_disconnect" : true,
       "scripts": [
@@ -76,7 +73,7 @@
     {
       "type": "shell",
       "environment_vars": [
-        "APPLIANCE_VERSION={{ user `APPLIANCE_VERSION` }}"
+        "K8S_APP_VERSION={{ user `K8S_APP_VERSION` }}"
       ],
       "pause_before": "20s",
       "scripts": [
@@ -121,18 +118,13 @@
     },
     {
       "type": "file",
-      "source": "files/setup-05-cadvisor.sh",
-      "destination": "/root/setup/setup-05-cadvisor.sh"
-    },
-    {
-      "type": "file",
       "source": "files/setup-06-tinywww.sh",
       "destination": "/root/setup/setup-06-tinywww.sh"
     },
     {
       "type": "file",
-      "source": "files/setup-07-fluentbit.sh",
-      "destination": "/root/setup/setup-07-fluentbit.sh"
+      "source": "files/tinywww.yml",
+      "destination": "/root/config/tinywww.yml"
     },
     {
       "type": "file",
@@ -143,7 +135,7 @@
   "post-processors": [
     {
       "type": "shell-local",
-      "environment_vars": ["APPLIANCE_VERSION={{ user `APPLIANCE_VERSION` }}", "KUBERNETES_APPLIANCE_NAME={{ user `vm_name` }}", "FINAL_KUBERNETES_APPLIANCE_NAME={{ user `vm_name` }}_{{user `APPLIANCE_VERSION`}}", "OVF_TEMPLATE={{ user `OVF_TEMPLATE` }}"],
+      "environment_vars": ["K8S_APP_VERSION={{ user `K8S_APP_VERSION` }}", "K8S_APPLIANCE_NAME={{ user `vm_name` }}", "FINAL_K8S_APPLIANCE_NAME={{ user `vm_name` }}_{{user `K8S_APP_VERSION`}}", "K8S_APP_OVF_TEMPLATE={{ user `k8s_app_ovf_template` }}"],
       "inline": [
         "cd manual",
         "./add_ovf_properties.sh"
@@ -151,4 +143,3 @@
     }
   ]
 }
-
