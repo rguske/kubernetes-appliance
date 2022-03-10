@@ -3,7 +3,7 @@
   "variables": {
     "k8s_app_ovf_template": "photon.xml.template",
     "ovftool_deploy_vcenter": "10.10.13.1",
-    "ovftool_deploy_vcenter_username": "administrator@vsphere.local",
+    "ovftool_deploy_vcenter_username": "administrator@jarvis.lab",
     "ovftool_deploy_vcenter_password": "VMware1!"
   },
   "builders": [
@@ -12,10 +12,10 @@
       "vm_name": "{{ user `vm_name` }}",
       "guest_os_type": "Other",
       "version": "13",
-      "disk_size": "12288",
+      "disk_size": "25600",
       "boot_command": [
         "<esc><wait>",
-        "vmlinuz initrd=initrd.img root=/dev/ram0 loglevel=3 ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/photon-kickstart.json photon.media=cdrom",
+        "vmlinuz initrd=initrd.img root=/dev/ram0 loglevel=3 ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/photon-kickstart.json photon.media=cdrom insecure_installation=1",
         "<enter>"
       ],
       "boot_wait": "10s",
@@ -120,21 +120,6 @@
       "type": "file",
       "source": "files/setup-05-shell.sh",
       "destination": "/root/setup/setup-05-shell.sh"
-    },
-    {
-      "type": "file",
-      "source": "files/setup-06-tinywww.sh",
-      "destination": "/root/setup/setup-06-tinywww.sh"
-    },
-    {
-      "type": "file",
-      "source": "files/tinywww.yml",
-      "destination": "/root/config/tinywww.yml"
-    },
-    {
-      "type": "file",
-      "source": "files/tinywww-debug.yml",
-      "destination": "/root/config/tinywww-debug.yml"
     }
   ],
   "post-processors": [
