@@ -1,6 +1,6 @@
 {
     "appliance": {
-        "version": "v0.1.0"
+        "version": "v0.2.0"
     },
     "antrea": {
         "gitRepoTag": "v1.2.0",
@@ -44,12 +44,5 @@
                 "version": "v1.8.0"
             }
         ]
-    },
-    "tinywww": {
-        "gitRepoTag": "master",
-        "containers": [{
-            "name": "projects.registry.vmware.com/veba/tinywww",
-            "version": "latest"
-        }]
     }
 }
