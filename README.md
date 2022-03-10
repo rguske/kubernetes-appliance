@@ -14,7 +14,7 @@
   - [:man_cook: Building the Appliance](#man_cook-building-the-appliance)
     - [Debugging](#debugging)
     - [Output directoy](#output-directoy)
-  - [:computer: zsh installed](#computer-zsh-installed)
+  - [:computer: `zsh` installed](#computer-zsh-installed)
   - [Deployment Options Appliance](#deployment-options-appliance)
 
 ## :raised_hands: Credits
@@ -25,7 +25,7 @@ Credits goes out to [William Lam](https://twitter.com/lamw). The code basis come
 
 ## :eyeglasses: Overview
 
-This repository contains the necessary code to build a [![Photon OS 3.0](https://img.shields.io/badge/Photon%20OS-3.0-orange)](https://vmware.github.io/photon/) based Kubernetes Appliance.
+This repository contains the necessary code to build a [![Photon OS 4.0](https://img.shields.io/badge/Photon%20OS-4.0-orange)](https://vmware.github.io/photon/) based Kubernetes Appliance.
 
 The Appliance can be quickly deployed on vSphere for testing, development or learning purposes. Perhaps, it serves as the foundation for your project(s) 😉
 
