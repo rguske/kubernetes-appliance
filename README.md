@@ -16,6 +16,7 @@
     - [Output directoy](#output-directoy)
   - [:computer: `zsh` installed](#computer-zsh-installed)
   - [Deployment Options Appliance](#deployment-options-appliance)
+  - [Change Log](#change-log)
 
 ## :raised_hands: Credits
 
@@ -83,3 +84,8 @@ I'm a happy user of [zsh](https://www.zsh.org/) and [oh-my-zsh](https://github.c
 ![rguske-k8s-app-ova-2](https://user-images.githubusercontent.com/31652019/156720147-79fe6870-a4a5-4b08-a38c-63361980c982.png)
 
 ![rguske-k8s-app-ova-3](https://user-images.githubusercontent.com/31652019/156720148-f4fb1dd0-1543-4322-a4f7-a807254b75bf.png)
+
+## Change Log
+
+[2022-03-10] Added `local-path-provisioner` (v0.2.1)
+[2022-03-10] Updated to VMware PhotonOS v4 Rev.2 (v0.2.0)

@@ -55,3 +55,19 @@ do
     echo -e "\e[92mk8s service is still inactive, sleeping for 10secs" > /dev/console
     sleep 10
 done
+
+echo -e "\e[92mInstalling Local-Path-Storage ..." > /dev/console
+
+CSI_VERSION=$(jq -r < ${K8S_BOM_FILE} '.["csi"].gitRepoTag')
+
+# Download local-path-provisioner config file
+cd /root/config
+curl -L https://raw.githubusercontent.com/rancher/local-path-provisioner/${CSI_VERSION}/deploy/local-path-storage.yaml -o local-path-storage.yaml
+
+# Apply local-path-provisioner file to k8s
+kubectl apply -f local-path-storage.yaml
+
+# Set default K8s Storageclass
+kubectl patch sc local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+
+# End of Script

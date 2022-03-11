@@ -1,6 +1,6 @@
 {
     "appliance": {
-        "version": "v0.2.0"
+        "version": "v0.2.1"
     },
     "antrea": {
         "gitRepoTag": "v1.2.0",
@@ -8,6 +8,18 @@
             "name": "projects.registry.vmware.com/antrea/antrea-ubuntu",
             "version": "v1.2.0"
         }]
+    },
+    "csi": {
+        "gitRepoTag": "v0.0.21",
+        "containers": [{
+                "name": "rancher/local-path-provisioner",
+                "version": "v0.0.21"
+            },
+            {
+                "name": "gcr.io/google-containers/busybox",
+                "version": "latest"
+            }
+        ]
     },
     "kubernetes": {
         "gitRepoTag": "v1.21.5",
