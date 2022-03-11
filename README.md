@@ -87,5 +87,5 @@ I'm a happy user of [zsh](https://www.zsh.org/) and [oh-my-zsh](https://github.c
 
 ## Change Log
 
-[2022-03-10] Added `local-path-provisioner` (v0.2.1)
-[2022-03-10] Updated to VMware PhotonOS v4 Rev.2 (v0.2.0)
+- [2022-03-10] Added `local-path-provisioner` (v0.2.1)
+- [2022-03-10] Updated to VMware PhotonOS v4 Rev.2 (v0.2.0)
