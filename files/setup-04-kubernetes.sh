@@ -70,4 +70,20 @@ kubectl apply -f local-path-storage.yaml
 # Set default K8s Storageclass
 kubectl patch sc local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 
+# Join as a new Node
+
+if [ -n "${NODE_FQDN}" ]; then
+    echo -e "\e[92mJoining an existing Control Plane Node ..." > /dev/console
+
+# Create token on Master Node
+NODE_TOKEN=$(sshpass -p ${NODE_PASSWORD} ssh -o 'StrictHostKeyChecking no' root@${NODE_FQDN} kubeadm token create)
+DISCOVERY_TOKEN=$(sshpass -p ${NODE_PASSWORD} ssh -o 'StrictHostKeyChecking no' root@${NODE_FQDN} openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
+
+# Reset kubeadm config on the node
+kubeadm reset --force
+
+# Join Node
+kubeadm join ${NODE_FQDN}:6443 --token ${NODE_TOKEN} --discovery-token-ca-cert-hash sha256:${DISCOVERY_TOKEN} --ignore-preflight-errors=All
+fi
+
 # End of Script

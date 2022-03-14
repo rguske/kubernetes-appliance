@@ -51,6 +51,7 @@ sed -i '83i plugins=(git zsh-syntax-highlighting)' ~/.zshrc
 # ZSH Autocompletion for kubectl
 sed -i -e '$aif [ /usr/bin/kubectl ]; then source <(kubectl completion zsh); fi' ~/.zshrc
 
+echo -e "\e[92mInstalling Helm ..." > /dev/console
 # Install Helm
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
