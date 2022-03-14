@@ -18,6 +18,7 @@
     - [Output directoy](#output-directoy)
   - [:computer: `zsh` installed](#computer-zsh-installed)
   - [Deployment Options Appliance](#deployment-options-appliance)
+  - [Join an existing Kubernetes-Appliance](#join-an-existing-kubernetes-appliance]
   - [:clipboard: Change Log](#change-log)
 
 ## :raised_hands: Credits
@@ -86,6 +87,15 @@ I'm a happy user of [zsh](https://www.zsh.org/) and [oh-my-zsh](https://github.c
 ![rguske-k8s-app-ova-2](https://user-images.githubusercontent.com/31652019/156720147-79fe6870-a4a5-4b08-a38c-63361980c982.png)
 
 ![rguske-k8s-app-ova-3](https://user-images.githubusercontent.com/31652019/156720148-f4fb1dd0-1543-4322-a4f7-a807254b75bf.png)
+
+## Join an existing Kubernetes-Appliance
+
+In version v0.3.0, the possibility was added to join an existing Kubernetes-Appliance as an additional node.
+
+<img width="1071" alt="screenshot_change_name 2" src="https://user-images.githubusercontent.com/31652019/158141155-5ea9c215-4b0c-496a-8b75-65b90b49a7db.png">
+
+<img width="1496" alt="screenshot_change_name 7" src="https://user-images.githubusercontent.com/31652019/158141194-4578682e-5317-4206-a018-eb46566165a0.png">
+
 
 ## 📋 Change Log
 
