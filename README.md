@@ -18,7 +18,7 @@
     - [Output directoy](#output-directoy)
   - [:computer: `zsh` installed](#computer-zsh-installed)
   - [Deployment Options Appliance](#deployment-options-appliance)
-  - [Join an existing Kubernetes-Appliance](#join-an-existing-kubernetes-appliance]
+  - [Join an existing Kubernetes-Appliance](#join-an-existing-kubernetes-appliance)
   - [:clipboard: Change Log](#change-log)
 
 ## :raised_hands: Credits
