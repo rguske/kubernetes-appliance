@@ -33,6 +33,15 @@
             <Label>NTP</Label>
             <Description>NTP Servers (space separated)</Description>
         </Property>
+      <Category>Join as a new Worker Node</Category>
+        <Property ovf:key="guestinfo.node_fqdn" ovf:type="string" ovf:userConfigurable="true">
+            <Label>FQDN or IP Control Plane Node</Label>
+            <Description>Enter the FQDN or IP of the existing Control Plane Node. Example: "k8s-app-1.jarvis.tanzu"</Description>
+        </Property>
+        <Property ovf:key="guestinfo.node_password" ovf:password="true" ovf:type="string" ovf:userConfigurable="true" ovf:value="">
+            <Label>Root Password (Control Plane Node)</Label>
+            <Description>Root Password of the existing Control Plane Node</Description>
+        </Property>
       <Category>Proxy Settings (optional)</Category>
         <Property ovf:key="guestinfo.http_proxy" ovf:type="string" ovf:userConfigurable="true">
             <Label>HTTP Proxy</Label>
