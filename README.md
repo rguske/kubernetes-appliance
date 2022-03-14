@@ -4,6 +4,8 @@
 
 :pencil: [My Personal Blog](https://rguske.github.io)
 
+⬇️ [Download Kubernetes-Appliance](https://drive.google.com/file/d/1_TfOYd2_LR6fj6fo_zc511f3WbGurrQs/view?usp=sharing)
+
 ## :book: Table of Content
 
 - [Kubernetes Appliance - VMware OVA](#kubernetes-appliance---vmware-ova)
@@ -16,7 +18,7 @@
     - [Output directoy](#output-directoy)
   - [:computer: `zsh` installed](#computer-zsh-installed)
   - [Deployment Options Appliance](#deployment-options-appliance)
-  - [Change Log](#change-log)
+  - [:clipboard: Change Log](#change-log)
 
 ## :raised_hands: Credits
 
@@ -85,7 +87,7 @@ I'm a happy user of [zsh](https://www.zsh.org/) and [oh-my-zsh](https://github.c
 
 ![rguske-k8s-app-ova-3](https://user-images.githubusercontent.com/31652019/156720148-f4fb1dd0-1543-4322-a4f7-a807254b75bf.png)
 
-## Change Log
+## 📋 Change Log
 
 - [2022-03-14] Added option to join an existing K8s Appliance Node (v0.3.0)
 - [2022-03-10] Added `local-path-provisioner` (v0.2.1)
