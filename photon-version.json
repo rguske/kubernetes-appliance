@@ -6,5 +6,5 @@
   "numvcpus": "2",
   "ramsize": "4096",
   "guest_username": "root",
-  "guest_password": "##FILL-IN-SECURE-PASSWORD##"
+  "guest_password": "VMware1!"
 }

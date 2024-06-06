@@ -10,20 +10,20 @@
 
 - [Kubernetes Appliance - VMware OVA](#kubernetes-appliance---vmware-ova)
   - [:book: Table of Content](#book-table-of-content)
-  - [:raised_hands: Credits](#raised_hands-credits)
+  - [:raised\_hands: Credits](#raised_hands-credits)
   - [:eyeglasses: Overview](#eyeglasses-overview)
   - [:clipboard: Requirements](#clipboard-requirements)
-  - [:man_cook: Building the Appliance](#man_cook-building-the-appliance)
+  - [:man\_cook: Building the Appliance](#man_cook-building-the-appliance)
     - [Debugging](#debugging)
     - [Output directoy](#output-directoy)
   - [:computer: `zsh` installed](#computer-zsh-installed)
   - [Deployment Options Appliance](#deployment-options-appliance)
   - [Join an existing Kubernetes-Appliance](#join-an-existing-kubernetes-appliance)
-  - [:clipboard: Change Log](#change-log)
+  - [📋 Change Log](#-change-log)
 
 ## :raised_hands: Credits
 
-Credits goes out to [William Lam](https://twitter.com/lamw). The code basis comes from project [VMware Event Broker Appliance](https://www.vmweventbroker.io) which William and [Michael Gasch](https://twitter.com/embano1) are maintaining. I reused the code and stripped it down to the necessary pieces and extended it for my needs.
+Credits goes out to [William Lam](https://twitter.com/lamw). The code basis for this project is based on the awesome VMware open-source project [VMware Event Broker Appliance](https://www.vmweventbroker.io). I reused the code and stripped it down to the necessary pieces and adjusted it for my needs.
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/lamw?style=social)](https://twitter.com/lamw)
 
@@ -39,6 +39,7 @@ The Appliance can be quickly deployed on vSphere for testing, development or lea
 
 - [VMware ovftool](https://www.vmware.com/support/developer/ovf/)
 - [Packer](https://learn.hashicorp.com/tutorials/packer/get-started-install-cli)
+  - Run `packer init .` to download the [Packer plugin binaries](https://developer.hashicorp.com/packer/docs/commands/init) for vSphere.
 - [jq](https://github.com/stedolan/jq/wiki/Installation)
 - [PowerShell](https://github.com/PowerShell/PowerShell) - more optional
 
@@ -66,9 +67,9 @@ Optional: If you like to change the versions for e.g. Kubernetes or Antrea, modi
 
 ### Debugging
 
-The SSH session initiated will be visible in the detail provided when `PACKER_LOG=1` environment variable is set within the `build.sh` script. 
+The SSH session initiated will be visible in the detail provided when `PACKER_LOG=1` environment variable is set within the `build.sh` script.
 
-Example: `PACKER_LOG=1 packer build -var "K8S_APP_VERSION=${K8S_APP_VERSION_FROM_BOM}" -var-file=photon-builder.json -var-file=photon-version.json photon.json` ).
+Example: `PACKER_LOG=1 packer build -var "K8S_APP_VERSION=${K8S_APP_VERSION_FROM_BOM}" -var-file=photon-builder.json -var-file=photon-version.json photon.json`.
 
 ### Output directoy
 
@@ -99,6 +100,7 @@ In version v0.3.0, the possibility was added to join an existing Kubernetes-Appl
 
 ## 📋 Change Log
 
+- [2024-06-06] Updated versions to Kubernetes 1.29.2, Antrea to 1.15, etc.
 - [2022-03-14] Added option to join an existing K8s Appliance Node (v0.3.0)
 - [2022-03-10] Added `local-path-provisioner` (v0.2.1)
 - [2022-03-10] Updated to VMware PhotonOS v4 Rev.2 (v0.2.0)

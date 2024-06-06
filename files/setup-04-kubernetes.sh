@@ -2,34 +2,37 @@
 # Copyright 2019 VMware, Inc. All rights reserved.
 # SPDX-License-Identifier: BSD-2
 
-# Setup Docker and Kubernetes
+# Setup Containerd and Kubernetes
 
 set -euo pipefail
 
 K8S_BOM_FILE=/root/config/k8s-app-bom.json
 
-echo -e "\e[92mStarting Docker ..." > /dev/console
+echo -e "\e[92mStarting Containerd ..." > /dev/console
 systemctl daemon-reload
-systemctl start docker.service
-systemctl enable docker.service
+systemctl enable containerd
+systemctl start containerd
 
 echo -e "\e[92mDisabling/Stopping IP Tables  ..." > /dev/console
 systemctl stop iptables
 systemctl disable iptables
 
-# Customize the POD CIDR Network if provided or else default to 10.10.0.0/16
+# Customize the POD CIDR Network if provided or else default to 172.16.0.0/16
 if [ -z "${POD_NETWORK_CIDR}" ]; then
-    POD_NETWORK_CIDR="10.16.0.0/16"
+    POD_NETWORK_CIDR="172.16.0.0/16"
 fi
+
+# Start kubelet.service
+systemctl enable kubelet.service
 
 # Setup k8s
 echo -e "\e[92mSetting up k8s ..." > /dev/console
 K8S_VERSION=$(jq -r < ${K8S_BOM_FILE} '.["kubernetes"].gitRepoTag')
 cat > /root/config/kubeconfig.yml << __EOF__
-apiVersion: kubeadm.k8s.io/v1beta2
+apiVersion: kubeadm.k8s.io/v1beta3
 kind: InitConfiguration
 ---
-apiVersion: kubeadm.k8s.io/v1beta2
+apiVersion: kubeadm.k8s.io/v1beta3
 kind: ClusterConfiguration
 kubernetesVersion: ${K8S_VERSION}
 networking:
@@ -39,10 +42,11 @@ __EOF__
 echo -e "\e[92mDeloying kubeadm ..." > /dev/console
 HOME=/root
 kubeadm init --ignore-preflight-errors SystemVerification --skip-token-print --config /root/config/kubeconfig.yml
+
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
-kubectl --kubeconfig /root/.kube/config taint nodes --all node-role.kubernetes.io/master-
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 
 echo -e "\e[92mDeloying Antrea ..." > /dev/console
 kubectl --kubeconfig /root/.kube/config apply -f /root/download/antrea.yml
@@ -71,7 +75,6 @@ kubectl apply -f local-path-storage.yaml
 kubectl patch sc local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 
 # Join as a new Node
-
 if [ -n "${NODE_FQDN}" ]; then
     echo -e "\e[92mJoining an existing Control Plane Node ..." > /dev/console
 
