@@ -21,7 +21,6 @@ PROXY_USERNAME=$(/root/setup/getOvfProperty.py "guestinfo.proxy_username")
 PROXY_PASSWORD=$(/root/setup/getOvfProperty.py "guestinfo.proxy_password")
 NO_PROXY=$(/root/setup/getOvfProperty.py "guestinfo.no_proxy")
 ROOT_PASSWORD=$(/root/setup/getOvfProperty.py "guestinfo.root_password")
-DOCKER_NETWORK_CIDR=$(/root/setup/getOvfProperty.py "guestinfo.docker_network_cidr")
 POD_NETWORK_CIDR=$(/root/setup/getOvfProperty.py "guestinfo.pod_network_cidr")
 export KUBECONFIG="/root/.kube/config"
 

@@ -1,7 +1,7 @@
 {
-  "builder_host": "esxi04.jarvis.lab",
+  "builder_host": "##esxi-host-ip-address##",
   "builder_host_username": "root",
   "builder_host_password": "VMware1!",
-  "builder_host_datastore": "f6e0b5b4-16e217d7",
-  "builder_host_portgroup": "pg-client-15"
+  "builder_host_datastore": "vsanDatastore",
+  "builder_host_portgroup": "VM Network"
 }

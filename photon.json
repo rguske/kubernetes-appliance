@@ -2,7 +2,7 @@
   "min_packer_version": "1.6.3",
   "variables": {
     "k8s_app_ovf_template": "photon.xml.template",
-    "ovftool_deploy_vcenter": "10.10.13.1",
+    "ovftool_deploy_vcenter": "10.10.60.10",
     "ovftool_deploy_vcenter_username": "administrator@jarvis.lab",
     "ovftool_deploy_vcenter_password": "VMware1!"
   },
@@ -11,7 +11,7 @@
       "type": "vmware-iso",
       "vm_name": "{{ user `vm_name` }}",
       "guest_os_type": "Other",
-      "version": "13",
+      "version": "17",
       "disk_size": "25600",
       "boot_command": [
         "<esc><wait>",
